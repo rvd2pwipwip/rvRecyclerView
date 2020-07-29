@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_title_text">24sp</dimen>
+    <dimen name="item_description_text">16sp</dimen>
+    <dimen name="small_spacing">5dp</dimen>
+    <dimen name="normal_spacing">10dp</dimen>
+    <dimen name="medium_spacing">15dp</dimen>
+    <dimen name="large_spacing">20dp</dimen>
+    <dimen name="item_image_size">100dp</dimen>
+</resources>
