@@ -3,4 +3,6 @@
     <string name="item_icon">Item icon</string>
     <string name="item_title">Item Title</string>
     <string name="item_description">Item Description</string>
+    <string name="remove_button_label">Remove Item</string>
+    <string name="insert_item_button">Insert Item</string>
 </resources>
