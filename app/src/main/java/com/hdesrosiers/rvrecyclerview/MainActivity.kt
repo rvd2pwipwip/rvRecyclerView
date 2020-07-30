@@ -3,15 +3,16 @@ package com.hdesrosiers.rvrecyclerview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
     private val exampleList = generateDummyList(50)
-    private val adapter = ExampleAdapter(exampleList)
+    private val adapter = ExampleAdapter(exampleList, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +41,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insertItem(view: View) {
-        val index = Random.nextInt(8)
+        val index = Random.nextInt(5)
         val newItem = ExampleItem(R.drawable.u2_war, "Inserted at position $index", "Artist Name")
         exampleList.add(index, newItem)
 //        adapter.notifyDataSetChanged() //old way, resets whole list, no animation
         adapter.notifyItemInserted(index) //might put in adapter for better encapsulation
+        adapter.notifyItemRangeChanged(index, exampleList.size) //to update new positions
     }
 
     fun removeItem(view: View) {
-        val index = Random.nextInt(8)
+        val index = Random.nextInt(5)
         exampleList.removeAt(index)
 //        adapter.notifyDataSetChanged() //old way, resets whole list, no animation
         adapter.notifyItemRemoved(index)
+        adapter.notifyItemRangeChanged(index, exampleList.size) //to update new positions
+    }
+
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this, "Clicked on item $position", Toast.LENGTH_SHORT).show()
+        val clickedItem = exampleList[position]
+        clickedItem.itemTitleText = "Album Clicked"
+        adapter.notifyItemChanged(position)
     }
 }
