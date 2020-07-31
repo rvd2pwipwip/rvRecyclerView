@@ -13,7 +13,7 @@
         <FrameLayout
             android:id="@+id/thumbnail_frame"
             android:layout_width="@dimen/item_image_size"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/item_image_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,13 +24,19 @@
                 android:layout_height="@dimen/item_image_size"
                 android:contentDescription="@string/item_icon"
                 tools:srcCompat="@tools:sample/avatars" />
+            <View
+                android:id="@+id/scrim_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/black_scrim"
+                android:layout_gravity="bottom"
+                android:alpha="0.4"/>
 
             <TextView
                 android:id="@+id/item_number_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/colorPrimaryDark"
                 android:padding="@dimen/small_spacing"
                 android:text="TextView"
                 android:textColor="@android:color/primary_text_dark"
