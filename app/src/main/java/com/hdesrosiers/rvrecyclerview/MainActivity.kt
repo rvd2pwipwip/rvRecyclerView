@@ -12,7 +12,7 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
 
     private val exampleList = generateDummyList(50)
-    private val adapter = ExampleAdapter(exampleList, this)
+    private val adapter = ExampleAdapter(exampleList, this, this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +27,13 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
         val list = ArrayList<ExampleItem>()
 
         for (i in 0 until size) {
-            val drawable = when (i % 3) {
+            val drawable = when (i % 7) {
                 0 -> R.drawable.the_beatles_sgt_peppers
                 1 -> R.drawable.gorillaz_plastic_beach
+                2 -> R.drawable.pinky
+                3 -> R.drawable.david_guetta_without_you
+                4 -> R.drawable.chumbawamba
+                5 -> R.drawable.new_radicals
                 else -> R.drawable.u2_war
             }
 
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity(), ExampleAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Clicked on item $position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Clicked on item ${position + 1}", Toast.LENGTH_SHORT).show()
         val clickedItem = exampleList[position]
         clickedItem.itemTitleText = "Album Clicked"
         adapter.notifyItemChanged(position)

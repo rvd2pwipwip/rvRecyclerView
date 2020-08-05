@@ -30,7 +30,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/black_scrim"
                 android:layout_gravity="bottom"
-                android:alpha="0.4"/>
+                android:alpha="1"/>
 
             <TextView
                 android:id="@+id/item_number_text"
@@ -50,7 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/medium_spacing"
-            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/item_title_text"
             app:layout_constraintBottom_toTopOf="@id/item_description_text_view"
             app:layout_constraintStart_toEndOf="@+id/thumbnail_frame"

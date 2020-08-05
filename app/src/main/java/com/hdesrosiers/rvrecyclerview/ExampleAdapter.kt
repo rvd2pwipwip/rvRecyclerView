@@ -1,21 +1,27 @@
 package com.hdesrosiers.rvrecyclerview
 
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.example_item.view.*
 
 class ExampleAdapter(
     private val exampleList: List<ExampleItem>, //the data
-    private val listener: OnItemClickListener //the click contract
+    private val listener: OnItemClickListener, //the click contract
+    private var context: Context
 ) :
     RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder>() { //the view holder
 
-    //each ViewHolder object keeps 3 references to the 3 views inside the item layout
+    //each ViewHolder object keeps references to the views inside the item layout
     inner class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener { //inner for access to outer class properties (listener in OnClick)
         val imageView: ImageView =
@@ -55,6 +61,20 @@ class ExampleAdapter(
         holder.numberView.text = "${position + 1}"
         holder.titleView.text = currentItem.itemTitleText
         holder.descriptionView.text = currentItem.itemDescriptionText
+
+        val photo = BitmapFactory.decodeResource(context.resources, currentItem.imageResource)
+        Palette.from(photo).generate { palette ->
+            val bgColor = palette?.getVibrantColor(ContextCompat.getColor(context, android.R.color.black))
+            if (bgColor != null) {
+                val gradientDrawable = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                    intArrayOf(
+                        0X00000000,
+                        bgColor.toInt()
+                    ))
+                holder.itemView.scrim_overlay.background = gradientDrawable
+                holder.descriptionView.setTextColor(bgColor)
+            }
+        }
 
 //        if (position == 0) {
 //            holder.titleView.setBackgroundColor(Color.DKGRAY)
